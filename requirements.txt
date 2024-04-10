@@ -1,1 +1,10 @@
-
+shiny 
+render
+shinywidgets
+ipyleaflet
+geopy
+faicons
+requests
+pandas
+plotly.express
+pathlib
