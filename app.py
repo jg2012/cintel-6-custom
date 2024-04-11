@@ -6,6 +6,8 @@ from ipyleaflet import Map, Marker, Popup
 from shinywidgets import render_widget
 import ipywidgets as widgets
 
+ui.page_opts(title="EV Charging Stations in", fillable=True)
+
 # Define the path to the CSV file
 infile = "alt_fuel_stations.csv"
 
@@ -17,6 +19,15 @@ def dat():
 with ui.sidebar(id="sidebar_left", open="desktop"):
     ui.h2("Enter Zip Code")
     ui.input_text("zip_code", "Type a zip code")
+
+
+with ui.card(width=6):
+        ui.card_header("Total Charging Stations")
+        @render.text
+        def total_charging_stations():
+                charging_stations = filtered_infile()
+                total_stations = len(charging_stations)
+                return total_stations
 
 # Main UI layout setup
 with ui.layout_columns(fillable=True):
@@ -35,9 +46,6 @@ with ui.layout_columns(fillable=True):
                     m = Map(center=(charging_stations.iloc[0]["Latitude"], charging_stations.iloc[0]["Longitude"]), zoom=10)
                     for index, row in charging_stations.iterrows():
                         marker = Marker(location=(row["Latitude"], row["Longitude"]))
-                        
-                        
-                        
                         m.add_layer(marker)
                     # Set a fixed height for the map container
                     m.layout.height = "500px"
@@ -45,6 +53,8 @@ with ui.layout_columns(fillable=True):
                 else:
                     # If no data is found for the inputted zip code, return an empty map
                     return Map(center=(37.0902, -95.7129), zoom=4)
+
+
 
 # Reactive function to filter data based on zip code
 @reactive.calc
