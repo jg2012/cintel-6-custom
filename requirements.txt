@@ -8,3 +8,6 @@ requests
 pandas
 plotly.express
 pathlib
+matplotlib
+plotly
+seaborn
