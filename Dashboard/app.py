@@ -5,16 +5,22 @@ from shiny.express import render, ui, input
 from ipyleaflet import Map, Marker, Popup
 from shinywidgets import render_widget
 import ipywidgets as widgets
+import os
 
 ui.page_opts(title="EV Charging Stations in the U.S.", fillable=True)
 {"class": "bslib-page-dashboard"}
+infile = "Dashboard/data/alt_fuel_stations.csv"
 
-# Define the path to the CSV file
-infile = "/Users/joseguzman/Library/CloudStorage/OneDrive-nwmissouri.edu/Spring2/44630/cintel-6-custom/Dashboard/alt_fuel_stations.csv"
-
+if os.path.exists(infile):
+    # Change file permissions
+    os.chmod(infile, 0o700)
+else:
+    print(f"The file '{infile}' does not exist.")
 # Function to read data from the CSV file
 def dat():
     return pd.read_csv(infile)
+
+
 
 # Sidebar UI setup
 with ui.sidebar(id="sidebar_left", open="desktop"):
