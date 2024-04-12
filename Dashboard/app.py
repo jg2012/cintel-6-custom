@@ -25,6 +25,19 @@ with ui.sidebar(id="sidebar_left", open="desktop"):
         with ui.accordion_panel("Filter by State"):
             states = sorted(map(str, dat()["State"].unique().tolist()))
             ui.input_selectize("state_names", "Select States", choices=states, multiple=True)
+    ui.h6("Links:")
+    ui.a(
+        "GitHub Source",
+        href="https://github.com/jg2012/cintel-6-custom",
+        target="_blank",
+    )
+    ui.a(
+        "GitHub App",
+        href="https://github.com/jg2012/cintel-6-custom/blob/main/Dashboard/app.py",
+        target="_blank",
+    )
+    ui.a("PyShiny", href="https://shiny.posit.co/py/", target="_blank")
+   
 
     
 # Main UI layout setup
